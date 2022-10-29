@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: Spring Boot E-Commerce Backend
+  datasource:
+    url: jdbc:postgresql://peanut.db.elephantsql.com/livvhnfi
+    username: livvhnfi
+    password: 3fL4HcDba2-Gzkdo21-sDxS7JK7JlHO7
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+    show-sql: on
+    defer-datasource-initialization: on
+  sql:
+    init:
+      mode: always
+
+
+server:
+  port: 8080
