@@ -16,5 +16,5 @@ public class Category {
 
   @JoinTable(name = "category_items")
   @ManyToMany
-  List<Item> item;
+  List<Product> product;
 }

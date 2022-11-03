@@ -1,6 +1,6 @@
 package com.springbestpractice.springbestpractice.dto;
 
-import com.springbestpractice.springbestpractice.entity.Item;
+import com.springbestpractice.springbestpractice.entity.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -12,5 +12,5 @@ public class CategoryDto {
   private int id;
 
   private String name;
-  private List<Item> items;
+  private List<Product> products;
 }

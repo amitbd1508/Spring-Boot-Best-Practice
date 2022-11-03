@@ -60,7 +60,7 @@ public class SwaggerConfiguration {
       )
       .apiInfo(apiInfo())
       .select()
-      .apis(RequestHandlerSelectors.basePackage("com.carreservation.accountservice.controller"))
+      .apis(RequestHandlerSelectors.basePackage("com.springbestpractice.springbestpractice.controller"))
       .build();
   }
 

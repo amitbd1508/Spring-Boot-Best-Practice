@@ -1,10 +1,15 @@
 spring:
   application:
     name: Spring Boot E-Commerce Backend
+#  datasource:
+#    url: jdbc:postgresql://peanut.db.elephantsql.com/livvhnfi
+#    username: livvhnfi
+#    password: 3fL4HcDba2-Gzkdo21-sDxS7JK7JlHO7
+  h2:
+    console:
+      enabled: true
   datasource:
-    url: jdbc:postgresql://peanut.db.elephantsql.com/livvhnfi
-    username: livvhnfi
-    password: 3fL4HcDba2-Gzkdo21-sDxS7JK7JlHO7
+    url: jdbc:h2:mem:testdb
 
   jpa:
     hibernate:

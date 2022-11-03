@@ -13,7 +13,7 @@ public class Comment {
   private String comment;
 
   @ManyToOne
-  Item item;
+  Product product;
 
   @JoinColumn(name = "id_user")
   @ManyToOne

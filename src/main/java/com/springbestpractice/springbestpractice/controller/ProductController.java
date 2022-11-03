@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +30,9 @@ public class ProductController {
   }
 
   @PostMapping
-  public ResponseEntity<Void> save(@RequestBody ProductDto dto) {
-
+  public ResponseEntity<Void> save(@RequestBody @Valid ProductDto dto) {
     service.save(dto);
-    return new ResponseEntity<Void>(HttpStatus.CREATED);
+    return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")
