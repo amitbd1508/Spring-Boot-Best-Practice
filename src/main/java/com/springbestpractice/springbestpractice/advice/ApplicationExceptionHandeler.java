@@ -1,5 +1,6 @@
 package com.springbestpractice.springbestpractice.advice;
 
+import com.springbestpractice.springbestpractice.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,16 @@ public class ApplicationExceptionHandeler {
     });
 
     return errorMap;
+  }
+
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ExceptionHandler(ProductNotFoundException.class)
+  public Map<String, String> handleProductNotFoundException(ProductNotFoundException ex) {
+    Map<String, String> errorMap = new HashMap<>();
+    errorMap.put("error", ex.getMessage());
+    return errorMap;
+
+
   }
 
 }

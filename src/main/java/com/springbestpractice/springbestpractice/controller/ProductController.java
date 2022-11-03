@@ -1,6 +1,7 @@
 package com.springbestpractice.springbestpractice.controller;
 
 import com.springbestpractice.springbestpractice.dto.ProductDto;
+import com.springbestpractice.springbestpractice.exception.ProductNotFoundException;
 import com.springbestpractice.springbestpractice.service.ProductService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class ProductController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProductDto> findById(@PathVariable int id) {
+  public ResponseEntity<ProductDto> findById(@PathVariable int id) throws ProductNotFoundException {
     return ResponseEntity.ok(service.findById(id));
   }
 

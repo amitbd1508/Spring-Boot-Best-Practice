@@ -1,15 +1,17 @@
 package com.springbestpractice.springbestpractice.service.impl;
 
 import com.springbestpractice.springbestpractice.dto.ProductDto;
+import com.springbestpractice.springbestpractice.entity.Product;
+import com.springbestpractice.springbestpractice.exception.ProductNotFoundException;
 import com.springbestpractice.springbestpractice.mapper.ProductMapper;
 import com.springbestpractice.springbestpractice.repository.ProductRepository;
 import com.springbestpractice.springbestpractice.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Cache;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +45,11 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public ProductDto findById(int id) {
-    return mapper.toDTO(repository.findById(id).orElse(null));
+  public ProductDto findById(int id) throws ProductNotFoundException {
+    Optional<Product> product  = repository.findById(id);
+    if(product.isPresent() ) {
+      return mapper.toDTO(product.get());
+    }else throw new ProductNotFoundException(String.format("Product Not found with id %d", id));
   }
 
 }

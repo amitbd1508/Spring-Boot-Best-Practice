@@ -1,6 +1,7 @@
 package com.springbestpractice.springbestpractice.service;
 
 import com.springbestpractice.springbestpractice.dto.ProductDto;
+import com.springbestpractice.springbestpractice.exception.ProductNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface ProductService {
 
   List<ProductDto> findAll();
 
-  ProductDto findById(int id);
+  ProductDto findById(int id) throws ProductNotFoundException;
 }
