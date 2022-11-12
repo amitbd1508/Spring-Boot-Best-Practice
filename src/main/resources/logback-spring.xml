@@ -132,11 +132,11 @@
 
   <logger name="com.springbestpractice" additivity="false">
     <level value="TRACE" />
-    <appender-ref ref="CLOUDWATCH" />
+<!--    <appender-ref ref="CLOUDWATCH" />-->
   </logger>
 
-  <root level="INFO" additivity="false">
-    <appender-ref ref="CLOUDWATCH" />
-  </root>
+<!--  <root level="INFO" additivity="false">-->
+<!--    <appender-ref ref="CLOUDWATCH" />-->
+<!--  </root>-->
 
 </configuration>

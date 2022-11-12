@@ -1,6 +1,7 @@
 package com.springbestpractice.springbestpractice.dto;
 
 import com.springbestpractice.springbestpractice.entity.Category;
+import com.springbestpractice.springbestpractice.validation.ValidateProductType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -26,6 +27,9 @@ public class ProductDto {
   @Min(0)
   @Max(5)
   private float rating;
+
+  @ValidateProductType
+  private String productType;
 
   //private Category category;
 }
