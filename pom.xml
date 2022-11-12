@@ -35,6 +35,13 @@
       <artifactId>modelmapper</artifactId>
       <version>3.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>net.pennix</groupId>
+      <artifactId>logback-cloudwatch-appender</artifactId>
+      <!-- NOTE: change this to the most recent release version from the repo -->
+      <version>1.0.3</version>
+      <scope>runtime</scope>
+    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

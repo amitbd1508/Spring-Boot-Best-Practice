@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="LOGS" value="./logs" />
+
+  <appender name="Console"
+            class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+      </Pattern>
+    </layout>
+  </appender>
+<!--  <appender name="CLOUDWATCH" class="net.pennix.logback.appender.CloudWatchLogsAppender">-->
+
+<!--    &lt;!&ndash; queue size to hold events before put to cloudwatch &ndash;&gt;-->
+<!--    <queueSize>1024</queueSize>-->
+
+<!--    &lt;!&ndash; time to wait for remaining events to be cleared/sent before application quit &ndash;&gt;-->
+<!--    <maxFlushTime>1000</maxFlushTime>-->
+
+<!--    &lt;!&ndash; set to true if you need THREAD NAME or MDC PROPERTIES in log message, would slightly decrease performance to do this &ndash;&gt;-->
+<!--    <prepareForDeferredProcessing>false</prepareForDeferredProcessing>-->
+
+<!--    <worker>-->
+<!--      <accessKeyId></accessKeyId>-->
+<!--      <secretAccessKey>8</secretAccessKey>-->
+<!--      <region>us-east-2</region>-->
+<!--      <logGroup>springloggroup</logGroup>-->
+<!--      <logStream>springlogstream</logStream>-->
+
+<!--      &lt;!&ndash; logs are put in batch (10000 events max according to aws specification),-->
+<!--      so we can sleep a little while before draining the queue and doing api request,-->
+<!--      lower value would raise request frequency and cpu usage,-->
+<!--      set to 0 to disable sleep,-->
+<!--      which is not recommended unless the logs are really that much &ndash;&gt;-->
+<!--      <sleepTimeBetweenPuts>500</sleepTimeBetweenPuts>-->
+
+<!--      &lt;!&ndash; HTTP request timeout &ndash;&gt;-->
+<!--      <httpTimeout>3000</httpTimeout>-->
+
+<!--      <layout>-->
+<!--        <pattern>%1.-1level [%thread] %logger - %msg%n</pattern>-->
+<!--      </layout>-->
+<!--    </worker>-->
+<!--  </appender>-->
+
+<!--  <appender name="cloud-watch" class="io.github.dibog.AwsLogAppende">-->
+
+<!--    <awsConfig>-->
+<!--      <credentials>-->
+<!--        <accessKeyId>AKIA4FMKQ7JAIFUC3KQ5</accessKeyId>-->
+<!--        <secretAccessKey>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</secretAccessKey>-->
+<!--      </credentials>-->
+
+<!--      <region>us-east-2</region>-->
+
+<!--      <clientConfig class="com.amazonaws.ClientConfiguration">-->
+<!--        <proxyHost></proxyHost>-->
+<!--        <proxyPort></proxyPort>-->
+<!--      </clientConfig>-->
+<!--    </awsConfig>-->
+
+<!--    <createLogGroup>false</createLogGroup>-->
+<!--    <queueLength>100</queueLength>-->
+<!--    <groupName>group-name</groupName>-->
+<!--    <streamName>stream-name</streamName>-->
+<!--    <dateFormat>yyyyMMdd_HHmm</dateFormat>-->
+
+<!--    <layout>-->
+<!--      <pattern>[%thread] %-5level %logger{35} - %msg %n</pattern>-->
+<!--    </layout>-->
+
+<!--  </appender>-->
+
+  <appender name="RollingFile"
+            class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGS}/spring-boot-logger.log</file>
+    <encoder
+      class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+    </encoder>
+
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily and when the file reaches 10 MegaBytes -->
+      <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
+      </fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+
+  <appender name="SevereRollingFile"
+            class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGS}/severe-logger.log</file>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>WARN</level>
+    </filter>
+    <encoder
+      class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+    </encoder>
+
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily and when the file reaches 10 MegaBytes -->
+      <fileNamePattern>${LOGS}/archived/severe-logger-%d{yyyy-MM-dd}.%i.log
+      </fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <!-- LOG everything at INFO level -->
+  <root level="info">
+    <appender-ref ref="Console" />
+  </root>
+
+<!--  &lt;!&ndash; LOG "com.myplantdiary.*" at TRACE level &ndash;&gt;-->
+<!--  <logger name="com.springbestpractice" additivity="false">-->
+<!--    <appender-ref ref="SevereRollingFile" />-->t
+<!--    <appender-ref ref="RollingFile" />-->
+<!--    <appender-ref ref="Console" />-->
+<!--    <appender-ref ref="CLOUDWATCH" />-->
+<!--  </logger>-->
+
+  <logger name="com.springbestpractice" additivity="false">
+    <level value="TRACE" />
+    <appender-ref ref="CLOUDWATCH" />
+  </logger>
+
+  <root level="INFO" additivity="false">
+    <appender-ref ref="CLOUDWATCH" />
+  </root>
+
+</configuration>

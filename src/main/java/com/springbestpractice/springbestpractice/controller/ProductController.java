@@ -5,6 +5,8 @@ import com.springbestpractice.springbestpractice.exception.ProductNotFoundExcept
 import com.springbestpractice.springbestpractice.service.ProductService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.Map;
 @Api( tags = "Products")
 @RequiredArgsConstructor
 public class ProductController {
+  Logger log = LoggerFactory.getLogger(this.getClass());
   private final ProductService service;
   @GetMapping
   public ResponseEntity<List<ProductDto>> findAll() {
@@ -33,6 +36,7 @@ public class ProductController {
   @PostMapping
   public ResponseEntity<Void> save(@RequestBody @Valid ProductDto dto) {
     service.save(dto);
+    log.info(dto.toString() + "is saved successfully");
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
@@ -45,6 +49,7 @@ public class ProductController {
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable int id) {
     service.delete(id);
+    log.info(id + "is deleted successfully");
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
   }
 

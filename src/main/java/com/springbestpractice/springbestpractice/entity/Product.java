@@ -17,6 +17,6 @@ public class Product {
   private double price;
   private float rating;
 
-//  @ManyToMany(mappedBy = "product") // will not create item_category
-//  private List<Category> category;
+
+  private String productType;
 }
